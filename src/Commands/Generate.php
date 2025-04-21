@@ -52,6 +52,11 @@ final class Generate extends Command
 
                 $fs->ensureDirectoryExists($fs->dirname($path));
 
+                if ($fs->exists($path)) {
+                    $this->error("Failed to write {$relativePath} - file already exists");
+                    continue;
+                }
+
                 $success = (bool) $fs->put($path, $response->getContent());
 
                 if (! $success) {
