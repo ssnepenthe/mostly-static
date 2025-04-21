@@ -42,3 +42,7 @@ Route::get('/blog/{post}', [PostController::class, 'show'])->static(BlogPostPara
 ```
 
 Finally, run `php artisan mostly-static:generate --output /path/to/desired/output/dir`. If omitted, output directory will default to the Laravel public path.
+
+## Inspiration
+
+Inspired by the static pages feature of [Tempest](https://tempestphp.com/docs).
