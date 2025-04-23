@@ -47,7 +47,7 @@ final class Generate extends Command
                     continue;
                 }
 
-                $path = join_paths($outputDir, ltrim(join_paths(rtrim($path, '/'), 'index.html')));
+                $path = join_paths($outputDir, $this->filename($path));
                 $relativePath = str_replace(getcwd(), '.', $path);
 
                 $fs->ensureDirectoryExists($fs->dirname($path));
@@ -66,5 +66,16 @@ final class Generate extends Command
                 }
             }
         }
+    }
+
+    private function filename(string $path): string
+    {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+        if ('' === $extension) {
+            return ltrim(join_paths(rtrim($path, '/'), 'index.html'));
+        }
+
+        return ltrim($path, '/');
     }
 }
